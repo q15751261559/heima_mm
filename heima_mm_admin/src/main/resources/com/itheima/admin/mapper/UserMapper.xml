@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itheima.admin.mapper.UserMapper">
+    <insert id="addUser" parameterType="com.itheima.admin.pojo.User">
+        <selectKey keyProperty="userId" resultType="java.lang.String" order="BEFORE">
+            select uuid()
+        </selectKey>
+        insert into ss_user(user_id,email,password,user_name,dept_id,gender,state,birthday,join_date,telephone) values (#{userId},#{email},#{password},#{userName},#{deptId},#{gender},#{state},#{birthday},#{joinDate},#{telephone})
+    </insert>
+    <insert id="roleUser" parameterType="java.lang.String">
+        insert into ss_role_user(user_id,role_id) values (#{userId},#{roleId})
+    </insert>
+    <update id="updateUser" parameterType="com.itheima.admin.pojo.User">
+        update ss_user set email=#{email},password=#{password},user_name=#{userName},dept_id=#{deptId},gender=#{gender},state=#{state},birthday=#{birthday},join_date=#{joinDate},telephone=#{telephone} where user_id = #{userId}
+    </update>
+
+    <select id="selectByPage" resultType="com.itheima.admin.pojo.User">
+        select * from ss_user
+        <where>
+            <if test="state != null">
+                and state = #{state}
+            </if>
+            <if test="username != null">
+                and user_name like CONCAT('%',#{username},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itheima.admin.mapper.RoleMapper">
+    <insert id="userAuthRole">
+        insert into ss_role_module(role_id,module_id) values
+        <foreach collection="modules" item="module" separator="," close=";">
+            (#{roleId},#{module})
+        </foreach>
+    </insert>
+
+    <delete id="deleteRoleUser" parameterType="java.lang.String">
+        delete from ss_role_user where role_id=#{roleId}
+    </delete>
+    <delete id="deleteRoleModule" parameterType="java.lang.String">
+        delete from ss_role_module where role_id=#{roleId}
+    </delete>
+    <select id="queryRoleModules" resultType="java.lang.String" parameterType="java.lang.String">
+        select module_id from ss_role_module where role_id=#{id}
+    </select>
+</mapper>

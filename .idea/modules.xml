@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/heima_mm_admin/heima_mm_admin.iml" filepath="$PROJECT_DIR$/heima_mm_admin/heima_mm_admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima_mm_app/heima_mm_app.iml" filepath="$PROJECT_DIR$/heima_mm_app/heima_mm_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima_mm_common/heima_mm_common.iml" filepath="$PROJECT_DIR$/heima_mm_common/heima_mm_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima_mm_parent.iml" filepath="$PROJECT_DIR$/heima_mm_parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima_mm_pojo/heima_mm_pojo.iml" filepath="$PROJECT_DIR$/heima_mm_pojo/heima_mm_pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima_mm_question/heima_mm_question.iml" filepath="$PROJECT_DIR$/heima_mm_question/heima_mm_question.iml" />
+    </modules>
+  </component>
+</project>
