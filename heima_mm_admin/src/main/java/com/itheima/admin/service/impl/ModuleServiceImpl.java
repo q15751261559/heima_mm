@@ -30,7 +30,6 @@ public class ModuleServiceImpl implements ModuleService {
 
 
     public ModuleVo queryChildModule(ModuleVo moduleVo){
-        moduleVo.setChildren(new ArrayList<>());
         List<Module> modules=moduleMapper.selectList(new QueryWrapper<Module>().eq("parent_id",moduleVo.getId()));
         for (Module module1:modules)
             {

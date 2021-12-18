@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.beans.BeanUtils;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -21,6 +22,10 @@ public class ModuleVo {
     }
     public void addChildren(ModuleVo moduleVo)
     {
+        if (this.children==null)
+        {
+            this.children=new ArrayList<>();
+        }
         this.children.add(moduleVo);
     }
 
