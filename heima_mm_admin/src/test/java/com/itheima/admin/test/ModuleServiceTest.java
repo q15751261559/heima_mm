@@ -1,17 +1,10 @@
 package com.itheima.admin.test;
 
 import com.itheima.admin.AdminApp;
-import com.itheima.admin.pojo.Module;
-import com.itheima.admin.service.IUserService;
 import com.itheima.admin.service.ModuleService;
-import com.itheima.admin.vo.ModuleVo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = AdminApp.class)
 class ModuleServiceTest {

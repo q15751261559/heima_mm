@@ -1,15 +1,12 @@
 package com.itheima.admin.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.itheima.admin.vo.ModuleVo;
+import com.itheima.admin.vo.ModuleTreeVo;
 import lombok.Data;
-import org.springframework.beans.BeanUtils;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Data
 @TableName("ss_module")
@@ -18,22 +15,22 @@ public class Module {
     private String moduleId;
     private String name;
     private String parentId;
-    private BigDecimal ctype;
-    private BigDecimal state;
+    private Integer ctype;
+    private Integer state;
     private String curl;
     private String remark;
     private String parentName;
-    private BigDecimal isLeaf;
+    private Integer isLeaf;
     private String ico;
     private String cpermission;
     private String belong;
-    private BigDecimal orderNo;
+    private Integer orderNo;
 
 
 
-    public ModuleVo toModuleVo(){
-        ModuleVo moduleVo=new ModuleVo();
-        moduleVo.setId(this.getModuleId());
-        moduleVo.setLabel(this.getName());
-        return moduleVo;
+    public ModuleTreeVo toModuleVo(){
+        ModuleTreeVo moduleTreeVo =new ModuleTreeVo();
+        moduleTreeVo.setId(this.getModuleId());
+        moduleTreeVo.setLabel(this.getName());
+        return moduleTreeVo;
     }}

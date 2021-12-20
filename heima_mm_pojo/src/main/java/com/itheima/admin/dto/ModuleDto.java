@@ -8,8 +8,8 @@ import java.math.BigDecimal;
 public class ModuleDto {
     private String name;
     private String parentId;
-    private BigDecimal ctype;
-    private BigDecimal state;
+    private Integer ctype;
+    private Integer state;
     private String curl;
     private String remark;
 }

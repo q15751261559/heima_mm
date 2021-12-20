@@ -1,16 +1,13 @@
 package com.itheima.admin.controller;
 
-import com.itheima.admin.pojo.Module;
 import com.itheima.admin.service.ModuleService;
-import com.itheima.admin.vo.DeptVo;
-import com.itheima.admin.vo.ModuleVo;
+import com.itheima.admin.vo.ModuleTreeVo;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,17 +17,17 @@ public class ModuleController {
     @Autowired
     ModuleService moduleService;
     @GetMapping("/listall")
-    public List<ModuleVo> queryAllModule(){
+    public List<ModuleTreeVo> queryAllModule(){
         return moduleService.queryAllRootModule();
     }
 
     @GetMapping("/list")
-    public ModuleVo queryModule(){
-        ModuleVo moduleVo=new ModuleVo();
-        moduleVo.setId("1");
-        ModuleVo moduleVo1=moduleService.queryChildModule( moduleVo);
-        System.out.println(moduleVo1.getChildren());
-        return moduleVo1;
+    public ModuleTreeVo queryModule(){
+        ModuleTreeVo moduleTreeVo =new ModuleTreeVo();
+        moduleTreeVo.setId("1");
+        ModuleTreeVo moduleTreeVo1 =moduleService.queryChildModule(moduleTreeVo);
+        System.out.println(moduleTreeVo1.getChildren());
+        return moduleTreeVo1;
     }
 
 }
