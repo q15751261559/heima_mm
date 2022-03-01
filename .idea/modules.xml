@@ -8,6 +8,8 @@
       <module fileurl="file://$PROJECT_DIR$/heima_mm_parent.iml" filepath="$PROJECT_DIR$/heima_mm_parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/heima_mm_pojo/heima_mm_pojo.iml" filepath="$PROJECT_DIR$/heima_mm_pojo/heima_mm_pojo.iml" />
       <module fileurl="file://$PROJECT_DIR$/heima_mm_question/heima_mm_question.iml" filepath="$PROJECT_DIR$/heima_mm_question/heima_mm_question.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima_mm_serach/heima_mm_serach.iml" filepath="$PROJECT_DIR$/heima_mm_serach/heima_mm_serach.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima_mm_task/heima_mm_task.iml" filepath="$PROJECT_DIR$/heima_mm_task/heima_mm_task.iml" />
       <module fileurl="file://$PROJECT_DIR$/security_demo/security_demo.iml" filepath="$PROJECT_DIR$/security_demo/security_demo.iml" />
     </modules>
   </component>

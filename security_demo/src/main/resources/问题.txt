@@ -1,0 +1,5 @@
+1、用户名和密码是写死的，需要从数据库查询的！！
+    自定义一个类  implements UserDetailsService
+    User loadUserByUsername(String username);
+2、需要使用我们自己设计的登录页，而不是使用安全框架提供的！！
+

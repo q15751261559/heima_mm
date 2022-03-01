@@ -1,17 +1,11 @@
 package com.itheima.admin.controller;
 
+import com.itheima.PageDto;
 import com.itheima.PageVo;
 import com.itheima.Result;
 import com.itheima.admin.dto.DeptDto;
-import com.itheima.admin.dto.DeptPageDto;
-import com.itheima.admin.dto.UserDto;
-import com.itheima.admin.dto.UserPageDto;
-import com.itheima.admin.pojo.Dept;
-import com.itheima.admin.service.DeptService;
-import com.itheima.admin.vo.DeptPageVo;
+import com.itheima.admin.service.IDeptService;
 import com.itheima.admin.vo.DeptVo;
-import com.itheima.admin.vo.UserPageVo;
-import com.itheima.admin.vo.UserVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,51 +15,48 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/dept")
-@Api(value = "部门操作",tags = "Dept",description = "部门功能API")
+@Api(value = "管理后台部门模块接口", tags = "admin_user", description = "用于实现后台部门的增删改查操作")
 public class DeptController {
+
     @Autowired
-    DeptService deptService;
-    @ApiOperation("查询所有部门")
-    @GetMapping("/listall")
-    public List<DeptVo> queryAllDept(){
-        return deptService.queryAllDept();
+    private IDeptService deptService;
+
+    @PostMapping("/list")
+    @ApiOperation("分页查询部门")
+    public PageVo<DeptVo> queryByPage(@RequestBody PageDto pageDto){
+        return deptService.queryByPage(pageDto);
     }
 
-    @ApiOperation("根据ID查询部门")
-    @GetMapping("/{id}")
-    public DeptVo queryById(@PathVariable("id") String id){
-        return deptService.queryById(id);
+    @GetMapping("/listall")
+    @ApiOperation("查询所有部门")
+    public List<DeptVo> queryAll(){
+        List<DeptVo> deptVo=deptService.queryAll();
+        return deptVo;
+    }
+
+
+    @PostMapping("/add")
+    @ApiOperation("添加部门")
+    public Result addDept(@RequestBody DeptDto deptDto){
+        return deptService.addDept(deptDto);
+    }
+
+    @PutMapping("/edit")
+    @ApiOperation("编辑部门")
+    public Result updateDept(@RequestBody DeptDto deptDto){
+        return deptService.updateDept(deptDto);
     }
 
     @DeleteMapping("/{id}")
     @ApiOperation("删除部门")
-    public Result deleteById(@PathVariable("id") String id){
-        boolean result = deptService.deleteById(id);
-        return new Result(result,result?"删除部门成功":"删除部门失败",null);
+    public Result deleteDept(@PathVariable("id") String id){
+        return deptService.deleteDept(id);
     }
 
-    @PutMapping("/update")
-    public Result updateUser(@RequestBody DeptDto deptDto)
-    {
-        boolean result=deptService.updateDept(deptDto);
-        return new Result(result,result?"修改部门成功":"修改部门失败",null);
-    }
 
-    @PostMapping("/add")
-    @ApiOperation("新增部门")
-    public Result addDept(@RequestBody DeptDto deptDto){
-        boolean result=deptService.addDept(deptDto);
-        return new Result(result,result?"新增部门成功":"新增部门失败",null);
-    }
-
-    @PostMapping("/list")
-    public PageVo<DeptPageVo> queryByPage(@RequestBody DeptPageDto deptPageDto){
-        if(deptPageDto.getCurrentPage()==null){
-            deptPageDto.setCurrentPage(1);
-        }
-        if(deptPageDto.getPageSize()==null){
-            deptPageDto.setPageSize(10);
-        }
-        return deptService.queryByPage(deptPageDto);
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询部门")
+    public DeptVo queryById(@PathVariable("id") String id){
+        return deptService.queryById(id);
     }
 }

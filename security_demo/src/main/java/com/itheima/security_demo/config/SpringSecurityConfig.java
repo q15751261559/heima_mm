@@ -1,6 +1,5 @@
 package com.itheima.security_demo.config;
 
-import com.itheima.security_demo.service.impl.MyUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

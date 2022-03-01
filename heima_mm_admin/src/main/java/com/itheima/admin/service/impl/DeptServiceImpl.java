@@ -1,123 +1,97 @@
 package com.itheima.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.itheima.PageDto;
 import com.itheima.PageVo;
+import com.itheima.Result;
 import com.itheima.admin.dto.DeptDto;
-import com.itheima.admin.dto.DeptPageDto;
 import com.itheima.admin.mapper.DeptMapper;
 import com.itheima.admin.pojo.Dept;
-import com.itheima.admin.pojo.User;
-import com.itheima.admin.service.DeptService;
-import com.itheima.admin.vo.DeptPageVo;
+import com.itheima.admin.service.IDeptService;
 import com.itheima.admin.vo.DeptVo;
-import com.itheima.admin.vo.UserPageVo;
-import com.itheima.admin.vo.UserVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class DeptServiceImpl implements DeptService {
+@Transactional
+public class DeptServiceImpl implements IDeptService {
+
+
     @Autowired
-    DeptMapper deptMapper;
+    private DeptMapper deptMapper;
 
     @Override
-    public List<DeptVo> queryAllDept() {
-        List<Dept> depts=deptMapper.selectList(null);
-        List<DeptVo> deptVos=new ArrayList<>();
-        if(depts!=null){
-            for (Dept dept:depts)
-            {
-                DeptVo deptVo=new DeptVo();
-                BeanUtils.copyProperties(dept,deptVo);
-                deptVos.add(deptVo);
-            }
+    public PageVo<DeptVo> queryByPage(PageDto pageDto) {
+        IPage<Dept> page = new Page(pageDto.getCurrentPage(),pageDto.getPageSize());
+        QueryWrapper<Dept> queryWrapper= new QueryWrapper<>();
+        if(pageDto.getQueryString()!=null){
+            queryWrapper.like("dept_name",pageDto.getQueryString());
         }
-        return deptVos;
+        if(pageDto.getStatus()!=null){
+            queryWrapper.like("state",pageDto.getStatus());
+        }
+        IPage<Dept> deptIPage = deptMapper.selectPage(page, queryWrapper);
+        List<DeptVo> collect = getDeptVos(deptIPage.getRecords());
+        return new PageVo<DeptVo>(collect, (int) deptIPage.getTotal());
+    }
+
+    private List<DeptVo> getDeptVos(List<Dept> deptIPage) {
+        List<DeptVo> collect=new ArrayList<>();
+        for (Dept dept:deptIPage) {
+            DeptVo deptVo = new DeptVo(dept);
+            if (dept.getState()==null||dept.getState()==0) {
+                deptVo.setState("禁用");
+            }else {
+                deptVo.setState("启用");
+            }
+            collect.add(deptVo);
+        }
+        return collect;
+    }
+
+    @Override
+    public List<DeptVo> queryAll() {
+        List<Dept> depts = deptMapper.selectList(null);
+        return getDeptVos(depts);
+    }
+
+    @Override
+    public Result addDept(DeptDto deptDto) {
+        Dept dept = new Dept();
+        BeanUtils.copyProperties(deptDto,dept);
+        int insert = deptMapper.insert(dept);
+        return new Result(insert>0,insert>0?"添加成功":"添加失败",null);
+    }
+
+    @Override
+    public Result deleteDept(String id) {
+        int i = deptMapper.deleteById(id);
+        return new Result(i>0,i>0?"删除成功":"删除失败",null);
     }
 
     @Override
     public DeptVo queryById(String id) {
         Dept dept = deptMapper.selectById(id);
-        DeptVo deptVo=new DeptVo();
-        if(dept!=null){
-            BeanUtils.copyProperties(dept,deptVo);
-        }
+        DeptVo deptVo = new DeptVo(dept);
+        deptVo.setState(dept.getState().toString());
         return deptVo;
     }
 
     @Override
-    public boolean deleteById(String id) {
-        Dept dept=new Dept();
-        dept.setDeptId(id);
-        int i=deptMapper.deleteById(dept);
-        return i != 0;
-    }
-
-    @Override
-    public boolean addDept(DeptDto deptDto) {
-        String uuid=UUID.randomUUID().toString().replaceAll("-","");
-        deptDto.setDeptId(uuid);
-        Dept dept=new Dept();
-        BeanUtils.copyProperties(deptDto,dept);
-        boolean flag=false;
-        int i=deptMapper.insert(dept);
-        if (i!=0)
-        {
-            flag=true;
-        }
-        return flag;
-    }
-
-    @Override
-    public PageVo<DeptPageVo> queryByPage(DeptPageDto deptPageDto) {
-        //开启分页
-        PageHelper.startPage(deptPageDto.getCurrentPage(), deptPageDto.getPageSize());
-        QueryWrapper<Dept> wrapper=new QueryWrapper<>();
-        if (deptPageDto.getDeptName()!=null)
-        {
-            wrapper.like("dept_name",deptPageDto.getDeptName());
-        }
-        if (deptPageDto.getStatus()!=null){
-            wrapper.eq("state",deptPageDto.getStatus());
-
-        }
-        List<Dept> pages = deptMapper.selectList(wrapper);
-        PageInfo<Dept> page = new PageInfo<>(pages);
-
-        //List<User>  ==>  List<UserPageVo>
-        List<DeptPageVo> list = page.getList().stream().map(dept -> {
-            DeptPageVo deptPageVo = new DeptPageVo();
-            BeanUtils.copyProperties(dept,deptPageVo);
-            deptPageVo.setState(dept.getState());
-            return deptPageVo;
-        }).collect(Collectors.toList());
-
-
- /*       List<UserPageVo> list1 = new ArrayList<>();
-        for (User user : page.getList()) {
-            UserPageVo userPageVo = new UserPageVo();
-            BeanUtils.copyProperties(user,userPageVo);
-            userPageVo.setStatus(user.getState());
-            list1.add(userPageVo);
-        }*/
-
-        return new PageVo<DeptPageVo>(list,Long.valueOf(page.getTotal()).intValue());
-    }
-
-    @Override
-    public boolean updateDept(DeptDto deptDto) {
+    public Result updateDept(DeptDto deptDto) {
         Dept dept = new Dept();
-        if(deptDto!=null){
-            BeanUtils.copyProperties(deptDto,dept);
-        }
-        return deptMapper.updateById(dept)!=0;
+        BeanUtils.copyProperties(deptDto,dept);
+        int i = deptMapper.updateById(dept);
+        return new Result(i>0,i>0?"修改成功":"修改失败",null);
     }
+
+
 }

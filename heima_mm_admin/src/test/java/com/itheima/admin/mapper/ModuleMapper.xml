@@ -1,0 +1,17 @@
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE mapper-->
+<!--        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
+<!--        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+<!--<mapper namespace="com.itheima.admin.mapper.ModuleMapper">-->
+<!--    <select id="queryByPage" resultType="com.itheima.admin.pojo.Module">-->
+<!--        select * from ss_module-->
+<!--        <where>-->
+<!--            <if test="name != null">-->
+<!--                name like CONCAT('%',#{name},'%')-->
+<!--            </if>-->
+<!--            <if test="ctype != null">-->
+<!--                and ctype = #{ctype}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+<!--</mapper>-->

@@ -1,5 +1,7 @@
 package com.itheima.admin.pojo;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -9,7 +11,7 @@ import java.util.Date;
 @Data
 @TableName("ss_user")
 public class User {
-  @TableId("user_id")
+  @TableId
   private String userId;
   private String email;
   private String userName;
@@ -29,7 +31,12 @@ public class User {
   private String deptName;
   private String createBy;
   private String create_dept;
-  private Date createTime;
   private String updateBy;
+
+
+  @TableField(fill = FieldFill.INSERT)
+  private Date createTime;
+  @TableField(fill = FieldFill.INSERT_UPDATE)
   private Date updateTime;
+
 }

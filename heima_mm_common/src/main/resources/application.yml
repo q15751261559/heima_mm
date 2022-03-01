@@ -2,3 +2,27 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
+
+fdfs:
+  so-timeout: 1500
+  connect-timeout: 600
+  #缩略图生成参数
+  thumb-image:
+    width: 150
+    height: 150
+  #TrackerList参数,支持多个
+  tracker-list: 120.25.144.169:22122
+  web-server-url: http://120.25.144.169:8888/
+  pool:
+    max-total: 200
+    max-total-per-key: 50
+    max-wait-millis: 5000
+
+
+xxl:
+  job:
+    admin:
+      addresses: http://localhost:8080/xxl-job-admin
+    executor:
+      appname: heima-mm-tast
+      port: 999

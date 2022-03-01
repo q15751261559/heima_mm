@@ -2,8 +2,6 @@ package com.itheima.admin.vo;
 
 import lombok.Data;
 
-import java.util.Date;
-
 
 @Data
 public class RoleVo {
@@ -17,4 +15,5 @@ public class RoleVo {
     private String name;
     private String remark;
     private String createTime;
+    private String roleDesc;
 }

@@ -6,7 +6,7 @@ import lombok.Data;
 public class UserPageVo {
     private String userId;
     private String email;
-    private String userName;
+    private String username;
     private String gender;
     private String status; //state
     private String deptName;

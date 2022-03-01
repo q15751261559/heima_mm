@@ -8,11 +8,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="heima_mm_pojo" />
-        <module name="heima_mm_common" />
         <module name="heima_mm_admin" />
-        <module name="heima_mm_question" />
-        <module name="security_demo" />
+        <module name="heima_mm_serach" />
         <module name="heima_mm_app" />
+        <module name="heima_mm_common" />
+        <module name="heima_mm_question" />
+        <module name="heima_mm_task" />
+        <module name="security_demo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -22,6 +24,8 @@
       <module name="heima_mm_parent" target="8" />
       <module name="heima_mm_pojo" target="8" />
       <module name="heima_mm_question" target="8" />
+      <module name="heima_mm_serach" target="1.8" />
+      <module name="heima_mm_task" target="1.8" />
       <module name="security_demo" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -32,6 +36,8 @@
       <module name="heima_mm_common" options="-parameters" />
       <module name="heima_mm_pojo" options="-parameters" />
       <module name="heima_mm_question" options="-parameters" />
+      <module name="heima_mm_serach" options="-parameters" />
+      <module name="heima_mm_task" options="-parameters" />
       <module name="security_demo" options="-parameters" />
     </option>
   </component>

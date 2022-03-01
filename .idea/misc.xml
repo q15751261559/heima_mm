@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="EntryPointsManager">
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="org.springframework.beans.factory.annotation.Value" />
+    </list>
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/security_demo/pom.xml" />
+        <option value="$PROJECT_DIR$/heima_mm_task/pom.xml" />
+        <option value="$PROJECT_DIR$/heima_mm_serach/pom.xml" />
       </list>
     </option>
   </component>
